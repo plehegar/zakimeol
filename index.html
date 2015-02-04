@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Zakim End Of Life</title>
+<meta charset='utf-8'>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<style>
+h1 { text-align: center; color: #005A9C; background: white;margin-top: 10%; }
+div.display {font-family:"DejaVu Sans"; font-size:14vw;
+text-align:center; vertical-align:middle;}
+</style>
+</head>
+<body>
+<h1>Zakim End Of Life</h1>
+<div class='display' id="days"></div>
+<div class='display' id="time"></div>
+
+<script>
+
+var time_remaining = null;
+var timeout = null;
+
+function now() {
+  return (new Date()).getTime();
+}
+
+function pad(x) {return x < 10 ? "0" + x : "" + x;}
+
+function format_time(milliseconds) {
+  var seconds = Math.floor(milliseconds / 1000);
+  var minutes = Math.floor(seconds / 60);
+  var hours = Math.floor(minutes / 60);
+  var days = Math.floor(hours / 24);
+  var dseconds = (seconds % 60);
+  var dminutes = (minutes % 60);
+  var dhours = (hours % 24);
+  return pad(dhours) + ":" + pad(dminutes) + ":" + pad(dseconds);
+}
+
+function get_days(milliseconds) {
+  return Math.floor(milliseconds / (1000* 60* 60* 24));
+}
+
+var not_done = true;
+
+function set_time(time) {
+    var t = format_time(time);
+    document.getElementById("time").textContent = t;
+    document.getElementById("days").textContent = get_days(time) + " days";
+}
+
+function start() {
+  var end_time = new Date("2015-07-01");
+  function update_timer() {
+    var time_remaining = end_time - now();
+    if (time_remaining < 0) {
+      document.getElementById("days").textContent = "It's over!";
+    } else {
+      set_time(time_remaining);
+      timeout = setTimeout(update_timer, 100);
+    }
+  }
+  update_timer();
+}
+
+onload = function() {
+  start();
+};
+
+</script>
+</body>
+</html>
