@@ -6,16 +6,48 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <style>
-h1 { text-align: center; color: #005A9C; background: white;margin-top: 10%; }
-div.display {font-family:"DejaVu Sans"; font-size:14vw;
-text-align:center; vertical-align:middle;}
+html, body {
+  background-color: #000;
+  font-family: "Futura", "Helvetica", sans-serif;}
+h1 {
+  text-align: center;
+  color: #fff;
+  background: #000;
+  margin-top: 10%; }
+.wrapper {
+  display:flex;
+  flex-direction: column;}
+.bot {
+    text-align: center;}
+.bot img {
+  max-width:100%;}
+.display {
+  font-size:14vw;
+  text-align:center;
+  vertical-align:middle;}
+#time, #days {
+  text-align: center;
+  color: #fff;}
+
+@media screen and (min-width: 700px) {
+.wrapper {flex-direction: row;}
+}
+
+
+
 </style>
 </head>
 <body>
 <h1>Zakim End Of Life</h1>
-<div class='display' id="days"></div>
-<div class='display' id="time"></div>
-
+<div class="wrapper">
+  <div class="bot">
+  <img src="images/zakim.jpg">
+  </div>
+  <div class="clock">
+    <div class='display' id="days"></div>
+    <div class='display' id="time"></div>
+  </div>
+</div>
 <script>
 
 var time_remaining = null;
